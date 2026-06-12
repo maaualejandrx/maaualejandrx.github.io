@@ -33,16 +33,14 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-        working-directory: ./minor-mercury
-        
+
       - name: Build Astro
         run: pnpm run build
-        working-directory: ./minor-mercury
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./minor-mercury/dist
+          path: ./dist
 
   deploy:
     environment:

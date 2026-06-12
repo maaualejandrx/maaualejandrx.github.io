@@ -1,0 +1,240 @@
+---
+import { Image } from 'astro:assets';
+import doctoraImg from '../images/doctora.png';
+---
+
+<section id="hero-section" class="w-full h-screen sticky top-0 bg-gradient-to-r from-[#00B2FF]/50 via-[#00B2FF]/15 to-[#FAFAFA] to-100% overflow-hidden relative z-0 flex items-center">
+  <div class="w-full max-w-[1440px] mx-auto px-5 sm:px-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-[68px]">
+
+    <!-- ── LEFT ─────────────────────────────────────── -->
+    <div class="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:pr-10 gap-5">
+
+      <!-- Chip -->
+      <div class="hero-chip opacity-0 animate-jump-in [animation-delay:0.25s]">
+        <span class="chip-dot" aria-hidden="true"></span>
+        Clínica Dental &middot; Tabasco, México
+      </div>
+
+      <!-- H1 -->
+      <h1 class="text-5xl sm:text-7xl xl:text-8xl font-black text-[#0c1230] tracking-tighter leading-[0.95] flex flex-col items-center lg:items-start">
+        <span class="inline-block animate-typing overflow-hidden whitespace-nowrap pr-1 max-w-max">
+          Ayudando a los
+        </span>
+        <span class="inline-block opacity-0 animate-typing [animation-delay:1.2s] overflow-hidden whitespace-nowrap pr-1 max-w-max">
+          dientes de todo
+        </span>
+        <span class="inline-block text-[#0076c8] opacity-0 animate-typing [animation-delay:2.4s] overflow-hidden whitespace-nowrap border-r-4 border-r-[#0076c8] pr-2 max-w-max">
+          Tabasco
+        </span>
+      </h1>
+
+      <!-- Doctor -->
+      <p class="text-xl sm:text-2xl font-extrabold text-[#1d2939] opacity-0 animate-jump-in [animation-delay:3.6s]">
+        CD. Luz Elena Álvarez López
+      </p>
+
+      <!-- Tagline -->
+      <p class="text-sm sm:text-[1rem] text-[#3d5166] leading-relaxed max-w-[460px] opacity-0" style="animation: jumpIn 0.65s cubic-bezier(0.34,1.56,0.64,1) 4.05s both">
+        Tratamientos especializados con tecnología de punta y el calor humano que tu familia merece.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-3 justify-center lg:justify-start opacity-0" style="animation: jumpIn 0.65s cubic-bezier(0.34,1.56,0.64,1) 4.45s both">
+
+        <a href="#contacto-section" class="hero-btn-primary">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="17" height="17" aria-hidden="true">
+            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+          </svg>
+          Agendar Cita
+        </a>
+
+        <a href="#services-section" class="hero-btn-ghost">
+          Ver Servicios
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+
+      </div>
+
+      <!-- Stats -->
+      <div class="hero-stats opacity-0" style="animation: jumpIn 0.65s cubic-bezier(0.34,1.56,0.64,1) 4.85s both">
+        <div class="stat-item">
+          <span class="stat-num">15<span class="stat-plus">+</span></span>
+          <span class="stat-label">Años de exp.</span>
+        </div>
+        <span class="stat-sep" aria-hidden="true"></span>
+        <div class="stat-item">
+          <span class="stat-num"><span data-count="500">0</span><span class="stat-plus">+</span></span>
+          <span class="stat-label">Pacientes</span>
+        </div>
+        <span class="stat-sep" aria-hidden="true"></span>
+        <div class="stat-item">
+          <span class="stat-num">13<span class="stat-plus">+</span></span>
+          <span class="stat-label">Tratamientos</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── RIGHT: imagen (solo desktop) ─────────────── -->
+    <div class="hidden lg:flex lg:col-span-5 justify-center items-center relative order-2 overflow-visible">
+
+      <div class="relative w-[360px] h-[570px] rounded-[24px] overflow-visible shadow-2xl bg-slate-100 animate-float-card-slow">
+
+        <!-- Diente superior derecho -->
+        <div class="absolute -top-6 -right-12 animate-float-card z-20">
+          <img src={import.meta.env.BASE_URL + 'diente.svg'} alt="" aria-hidden="true"
+               class="w-20 h-20 object-contain transform rotate-12 filter drop-shadow-lg" />
+        </div>
+
+        <!-- Diente medio derecho -->
+        <div class="absolute top-[40%] -right-14 animate-float-card z-20">
+          <img src={import.meta.env.BASE_URL + 'diente.svg'} alt="" aria-hidden="true"
+               class="w-20 h-20 object-contain filter drop-shadow-lg" />
+        </div>
+
+        <!-- Diente inferior izquierdo -->
+        <div class="absolute -bottom-10 -left-12 animate-float-card z-20">
+          <img src={import.meta.env.BASE_URL + 'diente.svg'} alt="" aria-hidden="true"
+               class="w-20 h-20 object-contain transform -rotate-12 filter drop-shadow-lg" />
+        </div>
+
+        <!-- Foto -->
+        <div class="absolute inset-0 rounded-[24px] overflow-hidden bg-slate-100 animate-blur-fade z-10">
+          <Image
+            src={doctoraImg}
+            alt="CD. Luz Elena Álvarez López"
+            class="w-full h-full object-cover object-center scale-105"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- Tarjeta flotante de reseñas -->
+        <div class="hero-review-card opacity-0 animate-jump-in [animation-delay:5.3s]">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-count">+500 pacientes</p>
+          <p class="review-sub">satisfechos con su sonrisa</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ── Chip ──────────────────────────────────────────── */
+  .hero-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 16px 7px 10px;
+    border-radius: 999px;
+    background: rgba(0,118,200,.08);
+    border: 1px solid rgba(0,118,200,.22);
+    font-size: 0.8125rem; font-weight: 600; color: #0055a4;
+    letter-spacing: .01em;
+  }
+  .chip-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #0076c8; flex-shrink: 0;
+    animation: chipPulse 2s ease-in-out infinite;
+  }
+  @keyframes chipPulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(0,118,200,.45); }
+    50%     { box-shadow: 0 0 0 7px rgba(0,118,200,0); }
+  }
+
+  /* ── Primary button ────────────────────────────────── */
+  .hero-btn-primary {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 14px 28px;
+    border-radius: 13px;
+    background: #0076c8;
+    color: #fff;
+    font-size: .9375rem; font-weight: 700; letter-spacing: -.01em;
+    text-decoration: none;
+    box-shadow: 0 4px 22px rgba(0,118,200,.40);
+    transition: background .18s ease, transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .18s ease;
+  }
+  .hero-btn-primary:hover {
+    background: #005fa3;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(0,118,200,.50);
+  }
+  .hero-btn-primary:active { transform: scale(.97); }
+
+  /* ── Ghost button ──────────────────────────────────── */
+  .hero-btn-ghost {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 14px 22px;
+    border-radius: 13px;
+    border: 1.5px solid rgba(0,118,200,.28);
+    color: #0055a4;
+    font-size: .9375rem; font-weight: 600;
+    text-decoration: none;
+    background: rgba(0,118,200,.04);
+    transition: background .18s ease, border-color .18s ease, transform .22s cubic-bezier(.34,1.56,.64,1);
+  }
+  .hero-btn-ghost:hover {
+    background: rgba(0,118,200,.09);
+    border-color: rgba(0,118,200,.45);
+    transform: translateY(-2px);
+  }
+  .hero-btn-ghost svg { transition: transform .18s ease; }
+  .hero-btn-ghost:hover svg { transform: translateX(4px); }
+
+  /* ── Stats ─────────────────────────────────────────── */
+  .hero-stats { display: flex; align-items: center; gap: 16px; }
+  .stat-item  { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+  @media (min-width: 1024px) { .stat-item { align-items: flex-start; } }
+
+  .stat-num {
+    font-size: 1.625rem; font-weight: 900;
+    color: #0c1230; letter-spacing: -.04em; line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-plus { color: #0076c8; }
+  .stat-label {
+    font-size: .6875rem; font-weight: 500;
+    color: rgba(15,23,42,.42); text-transform: uppercase;
+    letter-spacing: .04em; white-space: nowrap;
+  }
+  .stat-sep {
+    width: 1px; height: 30px;
+    background: rgba(15,23,42,.10); flex-shrink: 0;
+  }
+
+  /* ── Review card ───────────────────────────────────── */
+  .hero-review-card {
+    position: absolute;
+    left: -5rem; bottom: 15%;
+    z-index: 20;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 16px;
+    padding: 14px 18px;
+    min-width: 164px;
+    box-shadow:
+      0 8px 32px rgba(0,0,0,.10),
+      inset 0 1px 0 rgba(255,255,255,1);
+  }
+  .review-stars { font-size: .875rem; color: #F5A623; letter-spacing: 2px; margin-bottom: 6px; }
+  .review-count { margin: 0; font-size: .875rem; font-weight: 700; color: #0c1230; line-height: 1.3; }
+  .review-sub   { margin: 2px 0 0; font-size: .6875rem; color: rgba(15,23,42,.42); }
+</style>
+
+<script>
+  function initHeroCta() {
+    const smooth = (e: Event) => {
+      e.preventDefault();
+      const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href') ?? '';
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    document.querySelectorAll<HTMLAnchorElement>('.hero-btn-primary, .hero-btn-ghost')
+      .forEach(btn => btn.addEventListener('click', smooth));
+  }
+  initHeroCta();
+  document.addEventListener('astro:page-load', initHeroCta);
+</script>

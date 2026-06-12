@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bulbGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFC14D" />
+      <stop offset="100%" stop-color="#F29F24" />
+    </linearGradient>
+
+    <path id="tooth" d="M 150 85
+             C 165 75, 178 88, 172 108
+             C 168 120, 170 135, 165 148
+             C 160 160, 155 155, 155 142
+             C 155 125, 145 125, 145 142
+             C 145 155, 140 160, 135 148
+             C 130 135, 132 120, 128 108
+             C 122 88, 135 75, 150 85 Z" />
+
+    <mask id="toothCutout">
+      <rect width="800" height="280" fill="white" />
+      <use href="#tooth" fill="black" />
+    </mask>
+  </defs>
+
+  <path d="M 125 180
+           C 110 150, 85 130, 85 95
+           A 65 65 0 1 1 215 95
+           C 215 130, 190 150, 175 180 Z"
+        fill="url(#bulbGradient)" mask="url(#toothCutout)" />
+
+  <use href="#tooth" fill="none" stroke="#214358" stroke-width="6" stroke-linejoin="round" />
+
+  <path d="M 125 180
+           C 110 150, 85 130, 85 95
+           A 65 65 0 1 1 215 95
+           C 215 130, 190 150, 175 180"
+        fill="none" stroke="#214358" stroke-width="8" stroke-linecap="round" />
+
+  <path d="M 100 75 A 50 50 0 0 1 145 40"
+        fill="none" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.65" />
+
+  <g fill="#214358">
+    <path d="M 122 185 Q 150 196 178 185 L 176 193 Q 150 204 124 193 Z" />
+    <path d="M 125 200 Q 150 211 175 200 L 173 208 Q 150 219 127 208 Z" />
+    <path d="M 129 215 Q 150 226 171 215 L 169 223 Q 150 234 131 223 Z" />
+    <path d="M 138 230 Q 150 248 162 230 Z" />
+  </g>
+
+  <text x="240" y="160"
+        font-family="'Oswald', 'Impact', 'Arial Narrow', 'Segoe UI', sans-serif"
+        font-weight="bold"
+        font-size="110"
+        fill="#214358"
+        letter-spacing="1">LUZ DENTAL</text>
+</svg>

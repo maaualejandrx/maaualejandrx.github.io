@@ -1,0 +1,119 @@
+---
+import { Image } from 'astro:assets';
+import doctoraDImg from '../images/doctora-diente.png';
+
+const horarios = [
+  { dia: "Lunes",     horas: "15:00 PM - 19:00 PM", cerrado: false },
+  { dia: "Martes",    horas: "15:00 PM - 19:00 PM", cerrado: false },
+  { dia: "Miércoles", horas: "15:00 PM - 19:00 PM", cerrado: false },
+  { dia: "Jueves",    horas: "15:00 PM - 19:00 PM", cerrado: false },
+  { dia: "Viernes",   horas: "15:00 PM - 19:00 PM", cerrado: false },
+  { dia: "Sábado",    horas: "Cerrado",              cerrado: true  },
+  { dia: "Domingo",   horas: "Cerrado",              cerrado: true  },
+];
+---
+
+<section id="contacto-section" class="w-full bg-[#FAFAFA] py-24 overflow-hidden relative z-20 reveal-section">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-8 space-y-12">
+
+    <div class="space-y-3 text-left">
+      <h2 class="text-4xl sm:text-5xl xl:text-6xl font-black text-[#0c1230] tracking-tighter leading-none">
+        <span class="rl"><span class="rl-i" style="--td:0ms">¿Estás listo</span></span><br/>
+        <span class="rl"><span class="rl-i text-[#0076c8]" style="--td:140ms">para tu cambio?</span></span>
+      </h2>
+      <p class="text-lg text-slate-500 font-medium max-w-xl reveal-item [transition-delay:400ms]">
+        Encuentra el horario que funcione para ti y nosotros nos ajustamos
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start w-full">
+
+      <!-- Mapa -->
+      <div class="flex flex-col space-y-6 w-full h-full justify-between reveal-item [transition-delay:600ms]">
+        <div class="w-full h-[450px] rounded-[20px] bg-slate-100 border border-slate-200 shadow-sm overflow-hidden relative flex items-center justify-center z-10">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3794.744405808801!2d-92.91344551667102!3d17.99062463392297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85edd8458a7b234f%3A0xa52177477d9362f2!2sUJAT%20Cl%C3%ADnica%20de%20Odontolog%C3%ADa%20Juchiman%20II%20UJAT!5e0!3m2!1ses-419!2smx!4v1779599188014!5m2!1ses-419!2smx"
+            width="800px" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <p class="text-xl font-extrabold text-[#0c1230] leading-relaxed max-w-lg tracking-wide reveal-item [transition-delay:800ms]">
+          Nos encontramos ubicados en la clínica de Odontología de la UJAT
+        </p>
+      </div>
+
+      <!-- Horarios con stagger -->
+      <div class="flex flex-col space-y-4 w-full">
+        {horarios.map((item, i) => (
+          <div
+            class="schedule-row w-full flex items-center justify-between bg-[#d2e5f5]/60 border border-[#d2e5f5]/30 px-8 py-4 rounded-[20px] shadow-sm hover:bg-[#d2e5f5]/90 hover:translate-x-2 transition-[background,transform] duration-300"
+            data-anim={i % 2 === 0 ? 'left' : 'right'}
+            style={`--td:${i * 80}ms`}
+          >
+            <span class="text-lg font-black text-[#0c1230]">{item.dia}</span>
+            <span class={`text-base font-extrabold tracking-wide ${item.cerrado ? 'text-slate-400' : 'text-[#0c1230]'}`}>
+              {item.horas}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Banner CTA -->
+  <div class="w-full pt-16 reveal-item [transition-delay:1000ms]">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-8">
+      <div class="bg-[#e3f2fd] rounded-[20px] p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-visible min-h-[320px]">
+
+        <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-4 z-10 max-w-md">
+          <h3 class="text-2xl sm:text-3xl font-black text-[#0c1230] tracking-tight leading-tight">
+            ¿Listo para la mejor<br /> experiencia dental?
+          </h3>
+          <p class="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
+            Agenda tu cita hoy, y da el primer paso para una mejor sonrisa
+          </p>
+          <a
+            href="#contacto-section"
+            class="inline-block text-xs font-extrabold bg-[#FAFAFA] text-[#0c1230] border border-slate-200 px-6 py-2.5 rounded-full hover:bg-white hover:shadow-sm transition-all duration-200"
+          >
+            ¡Agenda ahora!
+          </a>
+        </div>
+
+        <div class="w-full md:w-auto flex justify-center md:absolute md:bottom-0 md:right-4 z-20">
+          <div class="w-[350px] relative flex items-end justify-center">
+            <Image
+              src={doctoraDImg}
+              alt="Doctora mostrando prótesis dental"
+              loading="lazy"
+              class="w-full h-full object-contain object-bottom scale-110 origin-bottom"
+            />
+          </div>
+        </div>
+
+        <div class="absolute right-0 bottom-0 w-48 h-48 rounded-full bg-[#cbdff2]/40 blur-lg z-0 pointer-events-none overflow-hidden"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initContacto() {
+    const section = document.getElementById('contacto-section');
+    if (!section) return;
+
+    section.classList.remove('active');
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        section.classList.add('active');
+        observer.disconnect();
+      }
+    }, { rootMargin: '0px 0px -20% 0px', threshold: 0 });
+
+    setTimeout(() => observer.observe(section), 100);
+  }
+
+  initContacto();
+  document.addEventListener('astro:page-load', initContacto);
+</script>

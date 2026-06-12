@@ -1,0 +1,508 @@
+---
+const left  = [
+  { href: '#hero-section',     label: 'Inicio',    section: 'hero-section' },
+  { href: '#nosotros-section', label: 'Nosotros',  section: 'nosotros-section' },
+];
+const right = [
+  { href: '#services-section', label: 'Servicios',   section: 'services-section' },
+  { href: '#contacto-section', label: 'Contáctanos', section: 'contacto-section' },
+];
+const all = [...left, ...right];
+---
+
+<!-- ── Intro overlay ────────────────────────────────── -->
+<div id="intro-overlay"
+     class="fixed inset-0 z-[100] flex flex-col items-center justify-center pointer-events-none overflow-hidden"
+     style="animation:introFadeOut 2.2s cubic-bezier(0.4,0,0.2,1) 0.6s both;
+            background:radial-gradient(ellipse 70% 60% at 50% 50%,#eaf4ff 0%,#f8fbff 55%,#fff 100%)">
+  <div class="intro-ring" style="--d:0s;--s:140px"></div>
+  <div class="intro-ring" style="--d:.3s;--s:220px"></div>
+  <div class="intro-ring" style="--d:.6s;--s:310px"></div>
+  <svg class="intro-sparkle" style="top:14%;left:12%;animation-delay:.15s" viewBox="0 0 24 24" width="22" height="22"><path d="M12 2L13.5 9 20 12 13.5 15 12 22 10.5 15 4 12 10.5 9Z" fill="#F5A623" opacity=".9"/></svg>
+  <svg class="intro-sparkle" style="top:12%;right:13%;animation-delay:.35s" viewBox="0 0 24 24" width="16" height="16"><path d="M12 2L13.5 9 20 12 13.5 15 12 22 10.5 15 4 12 10.5 9Z" fill="#0076c8" opacity=".7"/></svg>
+  <svg class="intro-sparkle" style="bottom:18%;left:10%;animation-delay:.55s" viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L13.5 9 20 12 13.5 15 12 22 10.5 15 4 12 10.5 9Z" fill="#0076c8" opacity=".5"/></svg>
+  <svg class="intro-sparkle" style="bottom:20%;right:11%;animation-delay:.25s" viewBox="0 0 24 24" width="14" height="14"><path d="M12 2L13.5 9 20 12 13.5 15 12 22 10.5 15 4 12 10.5 9Z" fill="#F5A623" opacity=".6"/></svg>
+  <div class="relative z-10 flex flex-col items-center gap-4"
+       style="animation:introLogoScale .75s cubic-bezier(0.34,1.56,0.64,1) .1s both;opacity:0">
+    <img src={import.meta.env.BASE_URL + 'logo.svg'} class="h-24 w-auto drop-shadow-sm" alt="Luz Dental"/>
+    <div class="flex items-center gap-3">
+      <span class="h-px w-10 bg-gradient-to-r from-transparent to-[#0076c8]/40"></span>
+      <svg viewBox="0 0 8 8" width="8" height="8"><circle cx="4" cy="4" r="3" fill="#F5A623"/></svg>
+      <span class="h-px w-10 bg-gradient-to-l from-transparent to-[#0076c8]/40"></span>
+    </div>
+    <p class="text-xs font-bold text-[#214358]/50 tracking-[.4em] uppercase">Tabasco, México</p>
+  </div>
+</div>
+
+<!-- ── Scroll progress ─────────────────────────────── -->
+<div id="scroll-progress" class="fixed top-0 left-0 h-[2px] z-[60] origin-left"
+     style="width:100%;transform:scaleX(0);background:linear-gradient(90deg,#0076c8,#38bdf8,#0076c8)">
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════════ -->
+<header id="site-header" class="site-header">
+
+  <!-- gradient line at the bottom (appears on scroll) -->
+  <span class="header-line" aria-hidden="true"></span>
+
+  <div class="header-inner">
+
+    <!-- ① Spacer (mobile: balances hamburger to center logo) -->
+    <span class="hb-spacer" aria-hidden="true"></span>
+
+    <!-- ② Left links (desktop only) -->
+    <nav class="nl-group nl-left" aria-label="Nav izquierda">
+      {left.map((item, i) => (
+        <a href={item.href} data-section={item.section} class="nl"
+           style={`animation-delay:${1.3 + i * 0.08}s`}>
+          {item.label}
+          <span class="nl-bar" aria-hidden="true"></span>
+        </a>
+      ))}
+    </nav>
+
+    <!-- ③ Logo (always centered) -->
+    <a id="logo-link" href="#hero-section" class="header-logo" aria-label="Inicio">
+      <img src={import.meta.env.BASE_URL + 'logo.svg'} class="logo-img" alt="Luz Dental"/>
+    </a>
+
+    <!-- ④ Right links (desktop only) -->
+    <nav class="nl-group nl-right" aria-label="Nav derecha">
+      {right.map((item, i) => (
+        <a href={item.href} data-section={item.section} class="nl"
+           style={`animation-delay:${1.46 + i * 0.08}s`}>
+          {item.label}
+          <span class="nl-bar" aria-hidden="true"></span>
+        </a>
+      ))}
+    </nav>
+
+    <!-- ⑤ Hamburger (mobile only) -->
+    <button id="nav-hb" class="hb-btn" aria-label="Abrir menú" aria-expanded="false">
+      <span class="hb-icon" aria-hidden="true">
+        <span class="hb"></span>
+        <span class="hb"></span>
+        <span class="hb"></span>
+      </span>
+    </button>
+
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════
+     MOBILE DROPDOWN
+══════════════════════════════════════════════════ -->
+<div id="nav-dropdown" class="nav-dropdown" aria-hidden="true">
+  <nav class="dropdown-inner">
+    {all.map((item, i) => (
+      <a href={item.href} class="dl" style={`--di:${i}`}>
+        <span class="dl-label">{item.label}</span>
+        <svg class="dl-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 8h8M9 5l3 3-3 3"/>
+        </svg>
+      </a>
+    ))}
+  </nav>
+</div>
+
+<style>
+  /* ════════════════════════════════════════════════
+     HEADER SHELL
+  ════════════════════════════════════════════════ */
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    /* transparent on top */
+    background: transparent;
+    transition:
+      background   0.38s ease,
+      box-shadow   0.38s ease;
+    animation: headerIn 0.7s cubic-bezier(0.16,1,0.3,1) 1.1s both;
+  }
+
+  @keyframes headerIn {
+    from { opacity: 0; transform: translateY(-100%); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* scrolled state — glass materialises */
+  .site-header.scrolled {
+    background: rgba(255, 255, 255, 0.86);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
+  }
+
+  /* gradient bottom line (only scrolled) */
+  .header-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent       0%,
+      rgba(0,118,200,.35) 20%,
+      rgba(56,189,248,.55) 50%,
+      rgba(0,118,200,.35) 80%,
+      transparent       100%
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .site-header.scrolled .header-line { opacity: 1; }
+
+  /* ════════════════════════════════════════════════
+     INNER ROW
+  ════════════════════════════════════════════════ */
+  .header-inner {
+    display: flex;
+    align-items: center;
+    height: 68px;
+    padding: 0 20px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  @media (min-width: 640px) {
+    .header-inner { padding: 0 32px; }
+  }
+
+  /* ════════════════════════════════════════════════
+     LOGO — always the flex center
+  ════════════════════════════════════════════════ */
+  .header-logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    /* mobile: margin auto centers between spacer and hb */
+    margin: 0 auto;
+    transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .header-logo:hover { opacity: 0.82; transform: scale(1.03); }
+  .header-logo:active { transform: scale(0.97); }
+
+  .logo-img { height: 38px; width: auto; display: block; }
+  @media (min-width: 640px) { .logo-img { height: 44px; } }
+
+  /* desktop: logo is a plain flex item between the two nav groups */
+  @media (min-width: 768px) {
+    .header-logo { margin: 0; }
+  }
+
+  /* ════════════════════════════════════════════════
+     MOBILE SPACER (mirrors hamburger width to center logo)
+  ════════════════════════════════════════════════ */
+  .hb-spacer {
+    width: 40px;
+    flex-shrink: 0;
+  }
+  @media (min-width: 768px) { .hb-spacer { display: none; } }
+
+  /* ════════════════════════════════════════════════
+     DESKTOP NAV GROUPS
+  ════════════════════════════════════════════════ */
+  .nl-group {
+    display: none;
+    align-items: center;
+    gap: 2px;
+  }
+  @media (min-width: 768px) {
+    .nl-group { display: flex; }
+    .nl-left  { flex: 1; justify-content: flex-end; padding-right: 48px; }
+    .nl-right { flex: 1; justify-content: flex-start; padding-left: 48px; }
+  }
+  @media (min-width: 1024px) {
+    .nl-left  { padding-right: 64px; }
+    .nl-right { padding-left: 64px; }
+  }
+
+  /* ── individual link ── */
+  .nl {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: rgba(15, 23, 42, 0.60);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.18s ease, background 0.18s ease;
+    opacity: 0;
+    animation: nlIn 0.45s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  @keyframes nlIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @media (min-width: 1024px) {
+    .nl { padding: 6px 18px; font-size: 1rem; }
+  }
+
+  .nl:hover {
+    color: rgba(15, 23, 42, 0.90);
+    background: rgba(15, 23, 42, 0.04);
+  }
+
+  /* active text colour */
+  .nl.active { color: #0055a4; font-weight: 600; }
+
+  /* animated underline bar */
+  .nl-bar {
+    display: block;
+    height: 2px;
+    width: 100%;
+    border-radius: 99px;
+    background: #0076c8;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    margin-top: 2px;
+  }
+  .nl.active .nl-bar { transform: scaleX(1); }
+  .nl:hover .nl-bar  { transform: scaleX(0.5); opacity: 0.4; }
+  .nl.active:hover .nl-bar { transform: scaleX(1); opacity: 1; }
+
+  /* ════════════════════════════════════════════════
+     HAMBURGER BUTTON
+  ════════════════════════════════════════════════ */
+  .hb-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(15, 23, 42, 0.10);
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+    transition: background 0.18s ease, border-color 0.18s ease, transform 0.2s ease;
+  }
+  @media (min-width: 768px) { .hb-btn { display: none; } }
+  .hb-btn:hover  { background: rgba(255, 255, 255, 0.70); border-color: rgba(15,23,42,0.16); }
+  .hb-btn:active { transform: scale(0.93); }
+
+  .hb-icon { display: flex; flex-direction: column; gap: 4.5px; }
+  .hb {
+    display: block;
+    height: 1.5px;
+    background: rgba(15, 23, 42, 0.65);
+    border-radius: 99px;
+    transform-origin: center;
+    transition:
+      transform 0.30s cubic-bezier(0.34,1.56,0.64,1),
+      opacity   0.20s ease,
+      width     0.20s ease;
+  }
+  .hb:nth-child(1) { width: 18px; }
+  .hb:nth-child(2) { width: 12px; }
+  .hb:nth-child(3) { width: 18px; }
+
+  .hb-btn[aria-expanded="true"] .hb:nth-child(1) { transform: translateY(6px) rotate(45deg);  width: 18px; }
+  .hb-btn[aria-expanded="true"] .hb:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hb-btn[aria-expanded="true"] .hb:nth-child(3) { transform: translateY(-6px) rotate(-45deg); width: 18px; }
+
+  /* ════════════════════════════════════════════════
+     MOBILE DROPDOWN
+  ════════════════════════════════════════════════ */
+  .nav-dropdown {
+    display: none; /* only on mobile */
+    position: fixed;
+    top: 68px;
+    left: 0; right: 0;
+    z-index: 49;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition:
+      opacity   0.26s ease,
+      transform 0.30s cubic-bezier(0.16,1,0.3,1);
+  }
+  @media (max-width: 767px) { .nav-dropdown { display: block; } }
+
+  .nav-dropdown.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .dropdown-inner {
+    margin: 0 12px;
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border: 1px solid rgba(15, 23, 42, 0.07);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.10),
+      0  4px 16px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+  .dl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: rgba(15, 23, 42, 0.75);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.055);
+    transition: background 0.15s ease, color 0.15s ease;
+
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  .dl:last-child { border-bottom: none; }
+
+  .nav-dropdown.open .dl {
+    animation: dlIn 0.35s cubic-bezier(0.16,1,0.3,1) both;
+    animation-delay: calc(0.04s + var(--di, 0) * 0.05s);
+  }
+  @keyframes dlIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .dl:hover   { background: rgba(0, 118, 200, 0.05); color: #004e8c; }
+  .dl:active  { background: rgba(0, 118, 200, 0.09); }
+
+  .dl-label { }
+
+  .dl-arrow {
+    width: 14px; height: 14px;
+    color: rgba(15, 23, 42, 0.22);
+    flex-shrink: 0;
+    transition: transform 0.18s ease, color 0.15s ease;
+  }
+  .dl:hover .dl-arrow { transform: translateX(3px); color: rgba(0, 118, 200, 0.5); }
+
+  /* ════════════════════════════════════════════════
+     INTRO ANIMATIONS
+  ════════════════════════════════════════════════ */
+  @keyframes introFadeOut {
+    0%,55% { opacity: 1; }
+    100%    { opacity: 0; }
+  }
+  @keyframes introLogoScale {
+    from { opacity:0; transform:scale(0.75) translateY(12px); }
+    to   { opacity:1; transform:scale(1) translateY(0); }
+  }
+  .intro-ring {
+    position: absolute;
+    width: var(--s); height: var(--s);
+    border-radius: 9999px;
+    border: 1.5px solid rgba(0,118,200,0.18);
+    animation: ringPulse 2.4s cubic-bezier(0.2,0,0.8,1) var(--d) infinite;
+    pointer-events: none;
+  }
+  @keyframes ringPulse {
+    0%   { transform:scale(0.6); opacity:0.7; }
+    100% { transform:scale(1.6); opacity:0; }
+  }
+  .intro-sparkle {
+    position: absolute;
+    animation:
+      sparklePop   0.6s cubic-bezier(0.34,1.56,0.64,1) both,
+      sparkleFloat 3s ease-in-out infinite 0.6s;
+  }
+  @keyframes sparklePop   { from{opacity:0;transform:scale(0) rotate(-30deg)}to{opacity:1;transform:scale(1) rotate(0)} }
+  @keyframes sparkleFloat { 0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(15deg)} }
+</style>
+
+<script>
+  function initHeader() {
+    const header    = document.getElementById('site-header')  as HTMLElement;
+    const logoLink  = document.getElementById('logo-link')    as HTMLAnchorElement;
+    const hbBtn     = document.getElementById('nav-hb')       as HTMLButtonElement;
+    const dropdown  = document.getElementById('nav-dropdown') as HTMLElement;
+    const progress  = document.getElementById('scroll-progress') as HTMLElement;
+    const overlay   = document.getElementById('intro-overlay')   as HTMLElement;
+    const navLinks  = document.querySelectorAll<HTMLAnchorElement>('.nl[data-section]');
+    const dropLinks = document.querySelectorAll<HTMLAnchorElement>('.dl');
+
+    // ── Intro ────────────────────────────────────────
+    overlay?.addEventListener('animationend', () => { overlay.style.display = 'none'; });
+
+    // ── Scroll: glass header + progress ──────────────
+    const onScroll = () => {
+      header?.classList.toggle('scrolled', window.scrollY > 20);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (progress) progress.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ── Smooth scroll ─────────────────────────────────
+    const closeMenu = () => {
+      dropdown?.classList.remove('open');
+      dropdown?.setAttribute('aria-hidden', 'true');
+      hbBtn?.setAttribute('aria-expanded', 'false');
+      hbBtn?.setAttribute('aria-label', 'Abrir menú');
+    };
+
+    const smooth = (e: Event) => {
+      const a    = e.currentTarget as HTMLAnchorElement;
+      const href = a.getAttribute('href') ?? '';
+      e.preventDefault();
+      if (href === '#hero-section') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      closeMenu();
+    };
+
+    logoLink?.addEventListener('click', smooth);
+    navLinks.forEach(l => l.addEventListener('click', smooth));
+    dropLinks.forEach(l => l.addEventListener('click', smooth));
+
+    // ── Hamburger toggle ─────────────────────────────
+    hbBtn?.addEventListener('click', () => {
+      const isOpen = dropdown?.classList.toggle('open');
+      hbBtn.setAttribute('aria-expanded', String(!!isOpen));
+      dropdown?.setAttribute('aria-hidden', String(!isOpen));
+      hbBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+    });
+
+    // ── Close on outside click ────────────────────────
+    document.addEventListener('click', (e) => {
+      if (!dropdown?.classList.contains('open')) return;
+      if (!header?.contains(e.target as Node) && !dropdown?.contains(e.target as Node)) {
+        closeMenu();
+      }
+    });
+
+    // ── Active section ────────────────────────────────
+    const sections = document.querySelectorAll<HTMLElement>('section[id]');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.dataset.section === entry.target.id);
+        });
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    sections.forEach(s => obs.observe(s));
+  }
+
+  initHeader();
+  document.addEventListener('astro:page-load', initHeader);
+</script>

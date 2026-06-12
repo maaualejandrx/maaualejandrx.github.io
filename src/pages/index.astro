@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Nosotros from '../components/Nosotros.astro';
+import Servicios from '../components/Servicios.astro';
+import Contacto from '../components/Contacto.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href={import.meta.env.BASE_URL + 'favicon.svg'} />
+		<link rel="icon" href={import.meta.env.BASE_URL + 'favicon.ico'} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Luz Dental | Tabasco</title>
+	</head>
+	<body>
+ 		<Header/>
+		<main>
+			<Hero/>
+			<Nosotros/>
+			<Servicios/>
+			<Contacto/>
+			<Footer/>
+		</main>
+		
+	</body>
+</html>
+
+<script>
+  function initScrollEffects() {
+
+    /* ── 1. Stagger from directions ([data-anim]) ─────────────── */
+    const animEls = document.querySelectorAll<HTMLElement>('[data-anim]:not(.in)');
+    const animObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        const delay = parseInt(el.dataset.delay ?? '0');
+        setTimeout(() => el.classList.add('in'), delay);
+        animObs.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+    animEls.forEach(el => animObs.observe(el));
+
+    /* ── 2. Counter animation ([data-count]) ─────────────────── */
+    const counters = document.querySelectorAll<HTMLElement>('[data-count]');
+    const cntObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        const target   = parseInt(el.dataset.count ?? '0');
+        const duration = 2200;
+        const start    = performance.now();
+
+        const tick = (now: number) => {
+          const t = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(target * eased).toLocaleString();
+          if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        cntObs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(el => cntObs.observe(el));
+  }
+
+  initScrollEffects();
+  document.addEventListener('astro:page-load', initScrollEffects);
+</script>
