@@ -42,4 +42,4 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./minor-mercury/dist # Sube la carpeta dist correcta
+          path: ./dist # Sube la carpeta dist correcta
