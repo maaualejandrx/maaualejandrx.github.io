@@ -2,7 +2,7 @@ name: Deploy Astro site to Pages
 
 on:
   push:
-    branches: ["main", "feat/migracion-a-root"] # <-- Ahora también se activará en esta rama
+    branches: ["main", "feat/migracion-a-root"]
 
 permissions:
   contents: read
@@ -33,24 +33,13 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-        working-directory: minor-mercury # <-- Busca el package.json aquí adentro
+        # Se quitó el working-directory de aquí para que instale todo el workspace desde la raíz
 
       - name: Build Astro
         run: pnpm run build
-        working-directory: minor-mercury # <-- Ejecuta el build aquí adentro
+        working-directory: minor-mercury # Mantiene este porque el script de build vive aquí
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./minor-mercury/dist # <-- Sube la carpeta dist que se generó dentro de minor-mercury
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          path: ./minor-mercury/dist # Sube la carpeta dist correcta
