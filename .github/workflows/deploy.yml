@@ -33,13 +33,23 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-        # Se quitó el working-directory de aquí para que instale todo el workspace desde la raíz
 
       - name: Build Astro
         run: pnpm run build
-        working-directory: minor-mercury # Mantiene este porque el script de build vive aquí
+        working-directory: minor-mercury
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist # Sube la carpeta dist correcta
+          path: ./dist
+          
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
