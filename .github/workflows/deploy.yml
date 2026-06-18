@@ -35,8 +35,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build Astro
-        run: pnpm run build
-        working-directory: minor-mercury
+        run: pnpm run build # <-- Eliminamos la línea de working-directory para que compile usando el package.json que me pasaste
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
