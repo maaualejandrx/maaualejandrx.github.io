@@ -1,29 +1,34 @@
 {
   "name": "LuzDental",
-  "type": "module",
   "version": "1.0.0",
-  "engines": {
-    "node": ">=22.12.0"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "astro preview"
   },
-  "dependencies": {
-    "@tailwindcss/postcss": "^4.3.0",
-    "@tailwindcss/vite": "^4.3.0",
-    "astro": "^6.3.3",
-    "sharp": "^0.34.5",
-    "tailwindcss": "^4.3.0",
-    "vite": "^8.0.14"
-  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
       "version": "^11.1.2",
       "onFail": "download"
     }
+  },
+  "type": "module",
+  "devDependencies": {
+    "astro": "^6.3.3"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
+    "tailwindcss": "^4.3.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependenciesModifier": "dangerouslyAllowAllBuilds"
   }
 }
